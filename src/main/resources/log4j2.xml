@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug" strict="true" name="XMLConfigTest"
+               packages="com.bext">
+    <Properties>
+        <Property name="filename">target/test.log</Property>
+    </Properties>
+    <Filter type="ThresholdFilter" level="trace"/>
+    <Appenders>
+        <Appender type="File" name="File" fileName="${filename}" append="false">
+            <Layout type="PatternLayout">
+                <Pattern>%d{HH:mm:ss.SSS}| %-5p | %-15c{1} | %m%n</Pattern>
+            </Layout>
+        </Appender>
+    </Appenders>
+    <Loggers>
+        <Logger name="AssertionsTest" level="trace" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger>
+        <Root level="error">
+            <!-- <AppenderRef ref="STDOUT"/>  -->
+            <!-- <AppenderRef ref="File"/> -->
+        </Root>
+    </Loggers>
+</Configuration>
