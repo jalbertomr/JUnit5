@@ -1,0 +1,11 @@
+--include-engine=junit-jupiter
+--exclude-engine=junit-vintage
+--disable-ansi-colors
+--details=tree
+--details-theme=ascii
+--fail-if-no-tests
+--reports-dir=D:/junit5/reports
+--class-path=D:\proy\labJUnit5\target\test-classes;D:\proy\labJUnit5\target\classes
+--scan-classpath=D:\proy\labJUnit5\target\test-classes
+
+
