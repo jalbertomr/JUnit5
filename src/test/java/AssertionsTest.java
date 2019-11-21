@@ -1,16 +1,14 @@
 import com.bext.Calculator;
 import com.bext.Persona;
-import org.apache.logging.log4j.core.appender.rewrite.MapRewritePolicy;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import javax.crypto.ExemptionMechanismSpi;
-import java.time.Duration;
 
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofMinutes;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AssertionsDemo {
+@Tag("assertions")
+public class AssertionsTest {
     private final Calculator calculator = new Calculator();
     private final Persona persona = new Persona("Jose", "Martinez");
 
@@ -78,12 +76,14 @@ public class AssertionsDemo {
     }
     
     @Test
+    @Tag("timeout")
     void timeoutNotExceeded(){  // será exitosa
         assertTimeout(ofMinutes(2),
                 () -> { /* código ejecutado en menos de 2 minutos. */ } );
     }
 
     @Test
+    @Tag("timeout")
     void timeoutNotExceededWithResult() {
         // será exitosa, resultado devuelto.
         String actualResult = assertTimeout( ofMinutes(2),
@@ -92,19 +92,22 @@ public class AssertionsDemo {
     }
 
     @Test
+    @Tag("timeout")
     void timeoutNotExceededWithMethod(){
         // assert invoca un referencia de método y regresa un objeto.
-        String saludoActual = assertTimeout( ofMinutes(2), AssertionsDemo::saludo);
+        String saludoActual = assertTimeout( ofMinutes(2), AssertionsTest::saludo);
         assertEquals("Hola, Mundito!", saludoActual);
     }
 
     @Test
+    @Tag("timeout")
     void timeoutExceeded() {
         // assert fallará org.opentest4j.AssertionFailedError: execution exceeded timeout of 10 ms by 91 ms
         assertTimeout( ofMillis(10), () -> Thread.sleep(100));
     }
 
     @Test
+    @Tag("timeout")
     void timeoutExceededWithPreemtiveTermination() {
         // assert fallará org.opentest4j.AssertionFailedError: execution timed out after 10 ms
         assertTimeoutPreemptively(ofMillis(10), ()->Thread.sleep(100));

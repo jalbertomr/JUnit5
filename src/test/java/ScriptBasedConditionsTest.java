@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ScriptBasedConditions {
+public class ScriptBasedConditionsTest {
     @Test // Static JavaScript expression.
     @EnabledIf("2 * 3 == 6")
     void willBeExecuted() {  }

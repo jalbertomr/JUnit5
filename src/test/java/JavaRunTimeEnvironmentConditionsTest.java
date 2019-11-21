@@ -4,7 +4,7 @@ import org.junit.jupiter.api.condition.EnabledOnJre;
 
 import static org.junit.jupiter.api.condition.JRE.*;
 
-public class JavaRunTimeEnvironmentConditions {
+public class JavaRunTimeEnvironmentConditionsTest {
     @Test
     @EnabledOnJre(JAVA_8)
     void onlyOnJava8() {

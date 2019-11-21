@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 import static org.junit.jupiter.api.condition.OS.*;
 
-public class OperativeSystemConditions {
+public class OperativeSystemConditionsTest {
     @Test
     @EnabledOnOs(WINDOWS)
     void onlyOnWindowsOs() {  /* validation code here*/

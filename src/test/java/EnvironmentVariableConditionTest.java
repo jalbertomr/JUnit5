@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 
-public class EnvironmentVariableCondition {
+public class EnvironmentVariableConditionTest {
     @Test
     @EnabledIfEnvironmentVariable(named = "ENV", matches = "staging-server")
     void onlyOnStagingServer() { /* validation code here*/ }

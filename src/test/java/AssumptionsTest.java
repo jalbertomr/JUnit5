@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
 //@Disabled("Tests para Clase Deshabilitada hasta pasar bug #12")
-public class AssumptionsDemo {
+public class AssumptionsTest {
 
     private final Calculator calculator = new Calculator();
 

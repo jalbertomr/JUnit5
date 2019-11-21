@@ -4,7 +4,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.lang.reflect.Method;
 
-public class DisplayNameGeneratorDemo {
+public class DisplayNameGeneratorTest {
     @Nested
     @DisplayNameGeneration(IndicativeSentences.ReplaceUnderscores.class)
     class A_year_is_not_supported {
