@@ -1,26 +1,34 @@
 import com.bext.Calculator;
 import com.bext.Persona;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.*;
 
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofMinutes;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Tag("assertions")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AssertionsTest {
+    final static Logger logger = LogManager.getLogger( AssertionsTest.class);
     private final Calculator calculator = new Calculator();
     private final Persona persona = new Persona("Jose", "Martinez");
 
     @Test
-    void standardAssertions() {
+    @Order(11)
+    void standardAssertions(TestInfo testinfo) {
+        logger.info( "11 " + testinfo.getDisplayName());
         assertEquals(2, calculator.add(1, 1));
         assertEquals(4, calculator.multiply(2, 2), "mensage opcional de falla es ahora el último parámetro.");
         assertTrue('a' < 'b', () -> "Mensages assert pueden ser evaluados lazy para evitar construcciones complejas innecesarias");
     }
 
     @Test
-    void groupedAssertions() {
+    @Order(10)
+    void groupedAssertions(TestInfo testinfo) {
+        logger.info( "10 " + testinfo.getDisplayName());
         //En assersiones agrupadas todas son ejecutadas, y las fallas son reportadas juntas
         assertAll("persona",
                 () -> assertEquals("Jose", persona.getNombre()),
@@ -29,7 +37,9 @@ public class AssertionsTest {
     }
 
     @Test
-    void dependentAssertions() {
+    @Order(9)
+    void dependentAssertions(TestInfo testinfo) {
+        logger.info( "9 " + testinfo.getDisplayName());
         //En un mismo bloque de codigo, si una assertion falla el código del mismo bloque será omitido.
         assertAll("properties",
                 () -> {
@@ -54,7 +64,9 @@ public class AssertionsTest {
     }
 
     @Test
-    void exceptionTestingThrowException() {
+    @Order(8)
+    void exceptionTestingThrowException(TestInfo testinfo) {
+        logger.info( "8 " + testinfo.getDisplayName());
         Exception exception = assertThrows( IllegalArgumentException.class, () -> {
             throw new IllegalArgumentException("argumento ilegal");
         });
@@ -62,14 +74,18 @@ public class AssertionsTest {
     }
 
     @Test
-    void exceptionTestingLambdaThrowException() {
+    @Order(7)
+    void exceptionTestingLambdaThrowException(TestInfo testinfo) {
+        logger.info( "7 " + testinfo.getDisplayName());
         Exception exception = assertThrows( ArithmeticException.class,
                 () -> { throw new ArithmeticException("/ by zero"); });
         assertEquals("/ by zero", exception.getMessage());
     }
 
     @Test
-    void exceptionTestingMethodThatThrowException() {
+    @Order(6)
+    void exceptionTestingMethodThatThrowException(TestInfo testinfo) {
+        logger.info( "6 " + testinfo.getDisplayName());
         Exception exception = assertThrows( ArithmeticException.class,
                 () -> { calculator.divide(1,0); });
         assertEquals("/ by zero", exception.getMessage());
@@ -77,14 +93,18 @@ public class AssertionsTest {
     
     @Test
     @Tag("timeout")
-    void timeoutNotExceeded(){  // será exitosa
+    @Order(5)
+    void timeoutNotExceeded(TestInfo testinfo){  // será exitosa
+        logger.info( "5 " + testinfo.getDisplayName());
         assertTimeout(ofMinutes(2),
                 () -> { /* código ejecutado en menos de 2 minutos. */ } );
     }
 
     @Test
     @Tag("timeout")
-    void timeoutNotExceededWithResult() {
+    @Order(4)
+    void timeoutNotExceededWithResult(TestInfo testinfo) {
+        logger.info( "4 " + testinfo.getDisplayName());
         // será exitosa, resultado devuelto.
         String actualResult = assertTimeout( ofMinutes(2),
                 () -> { return "X resultado";} );
@@ -93,7 +113,9 @@ public class AssertionsTest {
 
     @Test
     @Tag("timeout")
-    void timeoutNotExceededWithMethod(){
+    @Order(3)
+    void timeoutNotExceededWithMethod(TestInfo testinfo){
+        logger.info( "3 " + testinfo.getDisplayName());
         // assert invoca un referencia de método y regresa un objeto.
         String saludoActual = assertTimeout( ofMinutes(2), AssertionsTest::saludo);
         assertEquals("Hola, Mundito!", saludoActual);
@@ -101,14 +123,18 @@ public class AssertionsTest {
 
     @Test
     @Tag("timeout")
-    void timeoutExceeded() {
+    @Order(2)
+    void timeoutExceeded(TestInfo testinfo) {
+        logger.info( "2 " + testinfo.getDisplayName());
         // assert fallará org.opentest4j.AssertionFailedError: execution exceeded timeout of 10 ms by 91 ms
         assertTimeout( ofMillis(10), () -> Thread.sleep(100));
     }
 
     @Test
     @Tag("timeout")
-    void timeoutExceededWithPreemtiveTermination() {
+    @Order(1)
+    void timeoutExceededWithPreemtiveTermination(TestInfo testinfo) {
+        logger.info( "1 " + testinfo.getDisplayName());
         // assert fallará org.opentest4j.AssertionFailedError: execution timed out after 10 ms
         assertTimeoutPreemptively(ofMillis(10), ()->Thread.sleep(100));
     }
