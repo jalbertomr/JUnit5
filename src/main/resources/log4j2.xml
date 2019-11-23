@@ -3,6 +3,7 @@
                packages="com.bext">
     <Properties>
         <Property name="filename">target/test.log</Property>
+        <Property name="timing_filename">target/timing.log</Property>
     </Properties>
     <Filter type="ThresholdFilter" level="trace"/>
     <Appenders>
@@ -11,10 +12,18 @@
                 <Pattern>%d{HH:mm:ss.SSS}| %-5p | %-15c{1} | %m%n</Pattern>
             </Layout>
         </Appender>
+        <Appender type="File" name="Timing_File" fileName="${timing_filename}" append="false">
+            <Layout type="PatternLayout">
+                <Pattern>%d{HH:mm:ss.SSS}| %-5p | %-15c{1} | %m%n</Pattern>
+            </Layout>
+        </Appender>
     </Appenders>
     <Loggers>
-        <Logger name="InterfaceLoggedTest" level="trace" additivity="false">
+        <Logger name="algunaClaseaqui" level="trace" additivity="false">
             <AppenderRef ref="File"/>
+        </Logger>
+        <Logger name="TimingExtension" level="trace" additivity="false">
+            <AppenderRef ref="Timing_File"/>
         </Logger>
         <Root level="error">
             <!-- <AppenderRef ref="STDOUT"/>  -->
