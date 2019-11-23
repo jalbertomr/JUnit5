@@ -19,7 +19,7 @@
         </Appender>
     </Appenders>
     <Loggers>
-        <Logger name="algunaClaseaqui" level="trace" additivity="false">
+        <Logger name="InterfaceLoggedTest" level="trace" additivity="false">
             <AppenderRef ref="File"/>
         </Logger>
         <Logger name="TimingExtension" level="trace" additivity="false">
